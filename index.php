@@ -27,6 +27,9 @@
                         <a class="nav-link" href="sushi_orders.php">Sushi</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="bestel_overzicht.php">Besteloverzicht</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="customer_info.php">Klantgegevens</a>
                     </li>
                 </ul>
@@ -35,6 +38,12 @@
         </div>
     </nav>
 </header>
+<main>
+
+</main>
+<footer>
+
+</footer>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
