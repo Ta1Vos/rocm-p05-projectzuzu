@@ -82,7 +82,7 @@
     </div>
 </main>
 <footer>
-    <div class="row vh-20 bg-dark text-white text-center">
+    <div class="row vh-20 bg-dark text-white text-center p-3">
         <div class="col-2"></div>
         <div class="col-2">
             <h6>Contactgegevens</h6>
