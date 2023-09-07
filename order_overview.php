@@ -42,7 +42,27 @@
     <div class="row mt-5">
         <div class="col-2"></div>
         <div class="col-8">
+            <div class="card p-2 ps-3">
+                <h2 class="card-title">
+                    Bestelling
+                </h2>
+                <div class="card-body p-1">
+                    <p class="order-overview-result">
 
+                    </p>
+                    <p>
+                        <h5>Totaal: <span class="receipt-total"></span></h5>
+                    </p>
+                </div>
+            </div>
+            <div class="card p-2 ps-3">
+                <h2 class="card-title">
+                    Klantgegevens
+                </h2>
+                <div class="card-body p-1">
+                    U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.
+                </div>
+            </div>
         </div>
         <div class="col-2"></div>
     </div>
