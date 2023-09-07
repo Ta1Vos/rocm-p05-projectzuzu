@@ -10,7 +10,34 @@
     <title>ZuZu | Klantgegevens</title>
 </head>
 <body>
-
+<header>
+    <div class="container-fluid ps-0">
+        <img class="vw-100 vh-5" src="img/sushi_header.png" alt="Afbeelding van sushi">
+    </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="row container-fluid ps-0 ps-3">
+            <div class="col-4"></div>
+            <a class="col-1 navbar-brand ps-3" href="index.php">ZuZu</a>
+            <div class="col-1 collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sushi_orders.php">Sushi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bestel_overzicht.php">Besteloverzicht</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="customer_info.php">Klantgegevens</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    </nav>
+</header>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
