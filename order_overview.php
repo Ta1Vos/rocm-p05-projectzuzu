@@ -27,7 +27,7 @@
                         <a class="nav-link" href="sushi_orders.php">Sushi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="bestel_overzicht.php">Besteloverzicht</a>
+                        <a class="nav-link" href="order_overview.php">Besteloverzicht</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="customer_info.php">Klantgegevens</a>
