@@ -59,7 +59,26 @@
             </p>
         </div>
         <div class="col-4"></div>
-
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-4">
+            <div class="card mb-3">
+                <img src="img/sushi_image1.jpg" class="card-img-top" alt="Foto van sushi">
+                <div class="card-body">
+                    <h5 class="card-title">Bestel bij ons uw sushi's</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card mb-3">
+                <img src="img/sushi_image2.jpg" class="card-img-top" alt="Foto van sushi">
+                <div class="card-body">
+                    <h5 class="card-title">Keuze uit verschillende soorten sushi's</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-2"></div>
     </div>
 </main>
 <footer>
