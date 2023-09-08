@@ -37,6 +37,10 @@ body {
 }
 
 .nav-link, .text-bright-red {
-    color: #e00c1b !important;
+    color: #da616a !important;
     font-weight: bold;
+}
+
+.active {
+    color: #ff1323 !important;
 }
