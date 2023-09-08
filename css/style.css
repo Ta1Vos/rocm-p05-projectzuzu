@@ -23,3 +23,20 @@ body {
 .vh-20 {
     height: 20vh;
 }
+
+.bg-dark {
+    background-color: #0E1C36 !important;
+}
+
+.bg-red {
+    background-color: #AD2831;
+}
+
+.bg-white, bg-light {
+    background-color: #F7F7FF;
+}
+
+.nav-link, .text-bright-red {
+    color: #e00c1b !important;
+    font-weight: bold;
+}
