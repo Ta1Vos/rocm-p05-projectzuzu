@@ -42,38 +42,40 @@
     <div class="row mt-5">
         <div class="col-2"></div>
         <div class="col-8">
-            <h2>Klantgegevens</h2>
-            <!-- First name -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Voornaam</label>
-                <input type="text" class="form-control" id="firstNameInput">
-            </div>
-            <!-- Last name -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Achternaam</label>
-                <input type="text" class="form-control" id="lastNameInput">
-            </div>
-            <!-- Email -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Email</label>
-                <input type="email" class="form-control" id="emailInput">
-            </div>
-            <!-- Address -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Adres</label>
-                <input type="text" class="form-control" id="addressInput">
-            </div>
-            <!-- Postcode -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Postcode</label>
-                <input type="text" class="form-control" id="postcodeInput">
-            </div>
-            <!-- City -->
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Woonplaats</label>
-                <input type="text" class="form-control" id="cityInput">
-            </div>
-            <button type="button" class="btn btn-dark">Ga naar sushi's</button>
+            <form method="post" action="">
+                <h2>Klantgegevens</h2>
+                <!-- First name -->
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Voornaam</label>
+                    <input type="text" class="form-control" name="first-name-input">
+                </div>
+                <!-- Last name -->
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Achternaam</label>
+                    <input type="text" class="form-control" name="last-name-input">
+                </div>
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email-input">
+                </div>
+                <!-- Address -->
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Adres</label>
+                    <input type="text" class="form-control" name="address-input">
+                </div>
+                <!-- Postcode -->
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Postcode</label>
+                    <input type="text" class="form-control" name="postcode-input">
+                </div>
+                <!-- City -->
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Woonplaats</label>
+                    <input type="text" class="form-control" name="city-input">
+                </div>
+                <input type="submit" class="btn btn-dark" value="Ga naar sushi's">
+            </form>
         </div>
         <div class="col-2"></div>
     </div>
