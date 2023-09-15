@@ -45,3 +45,8 @@ body {
 .active {
     color: #ff1323 !important;
 }
+
+.error-field {
+    font-size: 13px;
+    color: red;
+}
