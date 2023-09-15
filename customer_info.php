@@ -34,8 +34,9 @@ if (isset($_POST['submit-info'])) {
         $lastNameError = "*Vul dit veld in";
         $fieldError = true;
     }
-    //DOES NOT WORK CORRECTLY. CANNOT CHECK OUT THE "."
-    if (strlen($emailInput) < 2 && !str_contains($emailInput, '@') && !str_contains($emailInput, '.')) {
+
+    // !empty()
+    if (!filter_var($emailInput, FILTER_VALIDATE_EMAIL))  {
         $emailError = "*Vul dit veld in";
         $fieldError = true;
     }
