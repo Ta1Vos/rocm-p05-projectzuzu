@@ -25,17 +25,16 @@ if (isset($_POST['submit-info'])) {
     $postalCodeInput = $_POST['postal-code-input'];
     $residenceInput = $_POST['residence-input'];
 
-    if (strlen($firstNameInput) <= 1) {
+    if (!empty($firstNameInput)) {
         $firstNameError = "*Vul dit veld in";
         $fieldError = true;
     }
 
-    if (strlen($lastNameInput) <= 1) {
+    if (!empty($lastNameInput)) {
         $lastNameError = "*Vul dit veld in";
         $fieldError = true;
     }
 
-    // !empty()
     if (!filter_var($emailInput, FILTER_VALIDATE_EMAIL))  {
         $emailError = "*Vul dit veld in";
         $fieldError = true;
@@ -51,7 +50,7 @@ if (isset($_POST['submit-info'])) {
         $fieldError = true;
     }
 
-    if (strlen($residenceInput) < 1) {
+    if (!empty($residenceInput)) {
         $residenceError = "*Vul dit veld in";
         $fieldError = true;
     }
