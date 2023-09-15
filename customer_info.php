@@ -1,3 +1,68 @@
+<?php
+//Error fields
+$firstNameError = null;
+$lastNameError = null;
+$emailError = null;
+$addressError = null;
+$postalCodeError = null;
+$residenceError = null;
+
+//Input fields
+$firstNameInput = null;
+$lastNameInput = null;
+$emailInput = null;
+$addressInput = null;
+$postalCodeInput = null;
+$residenceInput = null;
+
+if (isset($_POST['submit-info'])) {
+    $fieldError = false;
+
+    $firstNameInput = $_POST['first-name-input'];
+    $lastNameInput = $_POST['last-name-input'];
+    $emailInput = $_POST['email-input'];
+    $addressInput = $_POST['address-input'];
+    $postalCodeInput = $_POST['postal-code-input'];
+    $residenceInput = $_POST['residence-input'];
+
+    if (strlen($firstNameInput) <= 1) {
+        $firstNameError = "*Vul dit veld in";
+        $fieldError = true;
+    }
+
+    if (strlen($lastNameInput) <= 1) {
+        $lastNameError = "*Vul dit veld in";
+        $fieldError = true;
+    }
+    //DOES NOT WORK CORRECTLY. CANNOT CHECK OUT THE "."
+    if (strlen($emailInput) < 2 && !str_contains($emailInput, '@') && !str_contains($emailInput, '.')) {
+        $emailError = "*Vul dit veld in";
+        $fieldError = true;
+    }
+
+    if (strlen($addressInput) <= 4) {
+        $addressError = "*Vul dit veld in";
+        $fieldError = true;
+    }
+
+    if (strlen($postalCodeInput) != 6) {
+        $postalCodeError = "*Vul dit veld in";
+        $fieldError = true;
+    }
+
+    if (strlen($residenceInput) < 1) {
+        $residenceError = "*Vul dit veld in";
+        $fieldError = true;
+    }
+
+    if (!$fieldError) {
+        $firstNameInput = "Alles is ingevuld!";
+    } else {
+        $firstNameInput = "Niet alles is ingevuld!";
+    }
+}
+?>
+
 <!doctype html>
 <html lang="nl">
 <head>
@@ -46,35 +111,41 @@
                 <h2>Klantgegevens</h2>
                 <!-- First name -->
                 <div class="mb-3">
+                    <div class="error-field"><?= $firstNameError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Voornaam</label>
-                    <input type="text" class="form-control" name="first-name-input">
+                    <input type="text" class="form-control" name="first-name-input" value="<?= $firstNameInput; ?>">
                 </div>
                 <!-- Last name -->
                 <div class="mb-3">
+                    <div class="error-field"><?= $lastNameError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Achternaam</label>
-                    <input type="text" class="form-control" name="last-name-input">
+                    <input type="text" class="form-control" name="last-name-input" value="<?= $lastNameInput; ?>">
                 </div>
                 <!-- Email -->
                 <div class="mb-3">
+                    <div class="error-field"><?= $emailError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email-input">
+                    <input type="email" class="form-control" name="email-input" value="<?= $emailInput; ?>">
                 </div>
                 <!-- Address -->
                 <div class="mb-3">
+                    <div class="error-field"><?= $addressError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Adres</label>
-                    <input type="text" class="form-control" name="address-input">
+                    <input type="text" class="form-control" name="address-input" value="<?= $addressInput; ?>">
                 </div>
                 <!-- Postcode -->
                 <div class="mb-3">
+                    <div class="error-field"><?= $postalCodeError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Postcode</label>
-                    <input type="text" class="form-control" name="postcode-input">
+                    <input type="text" class="form-control" name="postal-code-input" value="<?= $postalCodeInput; ?>">
                 </div>
                 <!-- City -->
                 <div class="mb-3">
+                    <div class="error-field"><?= $residenceError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Woonplaats</label>
-                    <input type="text" class="form-control" name="city-input">
+                    <input type="text" class="form-control" name="residence-input" value="<?= $residenceInput; ?>">
                 </div>
-                <input type="submit" class="btn btn-dark" value="Ga naar sushi's">
+                <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">
             </form>
         </div>
         <div class="col-2"></div>
