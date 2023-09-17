@@ -6,6 +6,7 @@ $emailError = null;
 $addressError = null;
 $postalCodeError = null;
 $residenceError = null;
+$submitDescription = null;
 
 //Input fields
 $firstNameInput = null;
@@ -65,9 +66,10 @@ if (isset($_POST['submit-info'])) {
     }
 
     if (!$fieldError) {
-        $firstNameInput = "Alles is ingevuld!";
+        $submitDescription = "Het formulier is verzonden!<br>";
+        //Information save code/advanced validation system with real life locations.
     } else {
-        $firstNameInput = "Niet alles is ingevuld!";
+        $submitDescription = "Niet alles is correct ingevuld, het formulier is niet verzonden<br>";
     }
 }
 ?>
@@ -154,6 +156,7 @@ if (isset($_POST['submit-info'])) {
                     <label for="exampleInputPassword1" class="form-label">Woonplaats</label>
                     <input type="text" class="form-control" name="residence-input" value="<?= $residenceInput; ?>">
                 </div>
+                <div class="error-field"><?= $submitDescription; ?></div>
                 <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">
             </form>
         </div>
