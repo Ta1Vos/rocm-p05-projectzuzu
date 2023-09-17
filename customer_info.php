@@ -35,18 +35,27 @@ if (isset($_POST['submit-info'])) {
         $fieldError = true;
     }
 
-    if (!filter_var($emailInput, FILTER_VALIDATE_EMAIL))  {
+    if (empty($emailInput)) {
         $emailError = "*Vul dit veld in";
         $fieldError = true;
-    }
-
-    if (strlen($addressInput) <= 4) {
-        $addressError = "*Vul dit veld in";
+    } else if (!filter_var($emailInput, FILTER_VALIDATE_EMAIL))  {
+        $emailError = "*Vul een correcte email in";
         $fieldError = true;
     }
 
-    if (strlen($postalCodeInput) != 6) {
-        $postalCodeError = "*Vul dit veld in";
+    if (empty($addressInput)) {
+        $addressError = "*Vul dit veld in";
+        $fieldError = true;
+    } else if (strlen($addressInput) <= 4)  {
+        $emailError = "*Vul een correct adres in";
+        $fieldError = true;
+    }
+
+    if (empty($postalCodeInput)) {
+        $addressError = "*Vul dit veld in";
+        $fieldError = true;
+    } else if (strlen($postalCodeInput) != 6)  {
+        $emailError = "*Vul een correcte postcode in";
         $fieldError = true;
     }
 
