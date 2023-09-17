@@ -25,12 +25,12 @@ if (isset($_POST['submit-info'])) {
     $postalCodeInput = $_POST['postal-code-input'];
     $residenceInput = $_POST['residence-input'];
 
-    if (!empty($firstNameInput)) {
+    if (empty($firstNameInput)) {
         $firstNameError = "*Vul dit veld in";
         $fieldError = true;
     }
 
-    if (!empty($lastNameInput)) {
+    if (empty($lastNameInput)) {
         $lastNameError = "*Vul dit veld in";
         $fieldError = true;
     }
@@ -50,7 +50,7 @@ if (isset($_POST['submit-info'])) {
         $fieldError = true;
     }
 
-    if (!empty($residenceInput)) {
+    if (empty($residenceInput)) {
         $residenceError = "*Vul dit veld in";
         $fieldError = true;
     }
