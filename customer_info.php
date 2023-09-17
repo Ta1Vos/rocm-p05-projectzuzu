@@ -47,15 +47,15 @@ if (isset($_POST['submit-info'])) {
         $addressError = "*Vul dit veld in";
         $fieldError = true;
     } else if (strlen($addressInput) <= 4)  {
-        $emailError = "*Vul een correct adres in";
+        $addressError = "*Vul een correct adres in";
         $fieldError = true;
     }
 
     if (empty($postalCodeInput)) {
-        $addressError = "*Vul dit veld in";
+        $postalCodeError = "*Vul dit veld in";
         $fieldError = true;
     } else if (strlen($postalCodeInput) != 6)  {
-        $emailError = "*Vul een correcte postcode in";
+        $postalCodeError = "*Vul een correcte postcode in";
         $fieldError = true;
     }
 
