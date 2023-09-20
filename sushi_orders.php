@@ -1,3 +1,16 @@
+<?php
+// function loadSushi($loadingPlace, $objectToLoad) {
+//     $divContent = "";
+
+//     forEach($objectToLoad as $key) {
+//         $divContent += "<div class='row'>" . $key ."</div>";
+//     }
+//     for ($i=0; $i<count($objectToLoad); $i++) {
+        
+//     }
+// }
+?>
+
 <!doctype html>
 <html lang="nl">
 <head>
