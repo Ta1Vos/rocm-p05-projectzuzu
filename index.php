@@ -1,3 +1,17 @@
+<?php
+    $currentTime = date("G");
+
+    if ($currentTime >= 18) {
+        $greeting = "Goedenavond";
+    } else if ($currentTime >= 12) {
+        $greeting = "Goedemiddag";
+    } else if ($currentTime >= 6) {
+        $greeting = "Goedemorgen";
+    } else {
+        $greeting = "Goedenacht";
+    }
+?>
+
 <!doctype html>
 <html lang="nl">
 <head>
@@ -44,7 +58,7 @@
         <div class="col-4"></div>
         <div class="col-4">
             <h2>
-                Goedemiddag, welkom bij ZuZu
+                <span><?php echo $greeting; ?></span>, welkom bij ZuZu
             </h2>
             <small>
                 Wij zijn gespecialiseerd in de Japanse keuken.<br>
