@@ -28,7 +28,7 @@
         $greeting = "Goedenacht";
     }
 
-    if ($currentHour++ >= 24) {
+    if ($currentHour + 1 >= 24) {
         $currentHour -= 23;
     } else {
         $currentHour++;
