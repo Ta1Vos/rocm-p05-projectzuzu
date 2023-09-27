@@ -1,11 +1,20 @@
 <?php
+    $openTime = null;
+
     $currentHour = date("G");
     $currentDay = date("w");
+    $dateToday = date("j F Y");
     $currentMinute = date("i");
 
     //Starts at sunday(0), ends at saturday(6)
     $openTimes = [[12, 21], false, false, [16, 20], [16, 20], [15, 21], [12, 21]];
-    $openTime = number_format((float)$openTimes[$currentDay][0], 2, ".")  . "-" . number_format((float)$openTimes[$currentDay][1], 2, ".");
+
+    if ($openTimes[$currentDay]) {
+        $openTime = number_format((float)$openTimes[$currentDay][0], 2, ".")  . "-" . number_format((float)$openTimes[$currentDay][1], 2, ".");
+    } else {
+        $openTime = "Gesloten";
+    }
+
     $deliveryStatus = "Het spijt ons, maar rond deze tijden bezorgen wij nog niet";
 
 
@@ -85,7 +94,7 @@
                 Het woord "sushi" is afkomstig van "su", wat azijn betekent en "shi" rijst.
             </small>
             <p class="fs-5 fw-bold">
-                Vandaag dinsdag 7 september 2023
+                Het is vandaag <?= $dateToday; ?>
             </p>
             <p class="fs-6 fw-bold">
                 Bezorgtijd vanaf nu: <?= $deliveryStatus; ?><br>
