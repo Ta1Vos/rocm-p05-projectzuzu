@@ -1,15 +1,35 @@
 <?php
-    $currentTime = date("G");
+    $currentHour = date("G");
+    $currentDay = date("w");
+    $currentMinute = date("i");
 
-    if ($currentTime >= 18) {
+    //Starts at sunday(0), ends at saturday(6)
+    $openTimes = [[12, 21], false, false, [16, 20], [16, 20], [15, 21], [12, 21]];
+    $openTime = number_format((float)$openTimes[$currentDay][0], 2, ".")  . "-" . number_format((float)$openTimes[$currentDay][1], 2, ".");
+    $deliveryStatus = "Het spijt ons, maar rond deze tijden bezorgen wij nog niet";
+
+
+    if ($currentHour >= 18) {
         $greeting = "Goedenavond";
-    } else if ($currentTime >= 12) {
+    } else if ($currentHour >= 12) {
         $greeting = "Goedemiddag";
-    } else if ($currentTime >= 6) {
+    } else if ($currentHour >= 6) {
         $greeting = "Goedemorgen";
     } else {
         $greeting = "Goedenacht";
     }
+
+    if ($currentHour++ >= 24) {
+        $currentHour -= 23;
+    } else {
+        $currentHour++;
+    }
+
+    if ($currentHour > $openTimes[$currentDay][0] && $currentHour < $openTimes[$currentDay][1]) {
+        $deliveryStatus = "$currentHour:$currentMinute";
+    }
+
+    $currentOpenTime = $openTime;
 ?>
 
 <!doctype html>
@@ -58,7 +78,7 @@
         <div class="col-4"></div>
         <div class="col-4">
             <h2>
-                <span><?php echo $greeting; ?></span>, welkom bij ZuZu
+                <span><?= $greeting; ?></span>, welkom bij ZuZu
             </h2>
             <small>
                 Wij zijn gespecialiseerd in de Japanse keuken.<br>
@@ -68,8 +88,8 @@
                 Vandaag dinsdag 7 september 2023
             </p>
             <p class="fs-6 fw-bold">
-                Bezorgtijd: 17.00-21.00<br>
-                Openingstijd: 12.00-21.00
+                Bezorgtijd vanaf nu: <?= $deliveryStatus; ?><br>
+                Openingstijd: <?= $currentOpenTime; ?>
             </p>
         </div>
         <div class="col-4"></div>
