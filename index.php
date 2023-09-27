@@ -1,3 +1,47 @@
+<?php
+    $openTime = null;
+
+    $currentHour = date("G");
+    $currentDay = date("w");
+    $dateToday = date("j F Y");
+    $currentMinute = date("i");
+
+    //Starts at sunday(0), ends at saturday(6)
+    $openTimes = [[12, 21, "Zondag"], [false, false, "Maandag"], [false, false, "Dinsdag"],
+        [16, 20, "Woensdag"], [16, 20, "Donderdag"], [15, 21, "Vrijdag"], [12, 21, "Zaterdag"]];
+
+    if ($openTimes[$currentDay][0]) {
+        $openTime = number_format((float)$openTimes[$currentDay][0], 2, ".")  . "-" . number_format((float)$openTimes[$currentDay][1], 2, ".");
+    } else {
+        $openTime = "Gesloten";
+    }
+
+    $deliveryStatus = "Het spijt ons, maar rond deze tijden bezorgen wij nog niet";
+
+
+    if ($currentHour >= 18) {
+        $greeting = "Goedenavond";
+    } else if ($currentHour >= 12) {
+        $greeting = "Goedemiddag";
+    } else if ($currentHour >= 6) {
+        $greeting = "Goedemorgen";
+    } else {
+        $greeting = "Goedenacht";
+    }
+
+    if ($currentHour + 1 >= 24) {
+        $currentHour -= 23;
+    } else {
+        $currentHour++;
+    }
+
+    if ($currentHour > $openTimes[$currentDay][0] && $currentHour < $openTimes[$currentDay][1]) {
+        $deliveryStatus = "$currentHour:$currentMinute";
+    }
+
+    $currentOpenTime = "{$openTimes[$currentDay][2]}; $openTime";
+?>
+
 <!doctype html>
 <html lang="nl">
 <head>
@@ -44,18 +88,18 @@
         <div class="col-4"></div>
         <div class="col-4">
             <h2>
-                Goedemiddag, welkom bij ZuZu
+                <span><?= $greeting; ?></span>, welkom bij ZuZu
             </h2>
             <small>
                 Wij zijn gespecialiseerd in de Japanse keuken.<br>
                 Het woord "sushi" is afkomstig van "su", wat azijn betekent en "shi" rijst.
             </small>
             <p class="fs-5 fw-bold">
-                Vandaag dinsdag 7 september 2023
+                Het is vandaag <?= $dateToday; ?>
             </p>
             <p class="fs-6 fw-bold">
-                Bezorgtijd: 17.00-21.00<br>
-                Openingstijd: 12.00-21.00
+                Openingstijd: <?= $currentOpenTime; ?><br>
+                Bezorgtijd vanaf nu: <?= $deliveryStatus; ?><br>
             </p>
         </div>
         <div class="col-4"></div>
