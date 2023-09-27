@@ -7,9 +7,10 @@
     $currentMinute = date("i");
 
     //Starts at sunday(0), ends at saturday(6)
-    $openTimes = [[12, 21], false, false, [16, 20], [16, 20], [15, 21], [12, 21]];
+    $openTimes = [[12, 21, "Zondag"], [false, false, "Maandag"], [false, false, "Dinsdag"],
+        [16, 20, "Woensdag"], [16, 20, "Donderdag"], [15, 21, "Vrijdag"], [12, 21, "Zaterdag"]];
 
-    if ($openTimes[$currentDay]) {
+    if ($openTimes[$currentDay][0]) {
         $openTime = number_format((float)$openTimes[$currentDay][0], 2, ".")  . "-" . number_format((float)$openTimes[$currentDay][1], 2, ".");
     } else {
         $openTime = "Gesloten";
@@ -38,7 +39,7 @@
         $deliveryStatus = "$currentHour:$currentMinute";
     }
 
-    $currentOpenTime = $openTime;
+    $currentOpenTime = "{$openTimes[$currentDay][2]}; $openTime";
 ?>
 
 <!doctype html>
@@ -97,8 +98,8 @@
                 Het is vandaag <?= $dateToday; ?>
             </p>
             <p class="fs-6 fw-bold">
+                Openingstijd: <?= $currentOpenTime; ?><br>
                 Bezorgtijd vanaf nu: <?= $deliveryStatus; ?><br>
-                Openingstijd: <?= $currentOpenTime; ?>
             </p>
         </div>
         <div class="col-4"></div>
