@@ -1,3 +1,16 @@
+<?php
+    session_start();
+    $customerInfoDiv = null;
+
+    if ($_SESSION['customer-info']) {
+        $customerArray = unserialize($_SESSION['customer-info']);
+
+        $customerInfoDiv = "{$customerArray[0]} {$customerArray[1]}<br> {$customerArray[3]}<br> {$customerArray[4]} {$customerArray[5]}<br> {$customerArray[2]}";
+    } else {
+        $customerInfoDiv = "U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.";
+    }
+?>
+
 <!doctype html>
 <html lang="nl">
 <head>
@@ -60,7 +73,7 @@
                     Klantgegevens
                 </h2>
                 <div class="card-body p-1">
-                    U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.
+                    <?= $customerInfoDiv; ?>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 //Error fields
 $firstNameError = null;
 $lastNameError = null;
@@ -68,6 +69,7 @@ if (isset($_POST['submit-info'])) {
     if (!$fieldError) {
         $submitDescription = "Het formulier is verzonden!<br>";
         //Information save code/advanced validation system with real life locations.
+        $_SESSION['customer-info'] = serialize([$firstNameInput, $lastNameInput, $emailInput, $addressInput, $postalCodeInput, $residenceInput]);
     } else {
         $submitDescription = "Niet alles is correct ingevuld, het formulier is niet verzonden<br>";
     }
