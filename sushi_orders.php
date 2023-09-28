@@ -1,14 +1,15 @@
 <?php
-// function loadSushi($loadingPlace, $objectToLoad) {
-//     $divContent = "";
+    $divContent = null;
+ function loadSushi($loadingPlace, $objectToLoad) {
+     $divContent = "";
 
-//     forEach($objectToLoad as $key) {
-//         $divContent += "<div class='row'>" . $key ."</div>";
-//     }
-//     for ($i=0; $i<count($objectToLoad); $i++) {
+     forEach($objectToLoad as $key) {
+         $divContent .= "<div class='row'>" . $key ."</div>";
+     }
+     for ($i=0; $i<count($objectToLoad); $i++) {
         
-//     }
-// }
+     }
+ }
 ?>
 
 <!doctype html>
@@ -57,7 +58,7 @@
         <div class="col-8">
             <h2>Sushi's bestellen</h2>
             <div class="sushi-overview">
-
+                <?= $divContent; ?>
             </div>
             <button type="button" class="btn btn-dark mt-5">Verzenden</button>
         </div>
