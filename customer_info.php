@@ -13,6 +13,7 @@ $submitDescription = null;
 $firstNameInput = null;
 $lastNameInput = null;
 $emailInput = null;
+$emailInputType = "email";
 $addressInput = null;
 $postalCodeInput = null;
 $residenceInput = null;
@@ -35,6 +36,11 @@ if (isset($_POST['submit-info'])) {
     if (empty($lastNameInput)) {
         $lastNameError = "*Vul dit veld in";
         $fieldError = true;
+    }
+
+    //Cheatcode for testing with JOSF, turns email input into text input.
+    if ($firstNameInput == "JOSF" && $lastNameInput == "tEstEr") {
+        $emailInputType = "text";
     }
 
     if (empty($emailInput)) {
@@ -138,7 +144,7 @@ if (isset($_POST['submit-info'])) {
                 <div class="mb-3">
                     <div class="error-field"><?= $emailError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email-input" value="<?= $emailInput; ?>">
+                    <input type="<?= $emailInputType; ?>" class="form-control" name="email-input" value="<?= $emailInput; ?>">
                 </div>
                 <!-- Address -->
                 <div class="mb-3">
