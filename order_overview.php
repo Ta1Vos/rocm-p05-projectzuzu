@@ -5,7 +5,10 @@
     if ($_SESSION['customer-info']) {
         $customerArray = unserialize($_SESSION['customer-info']);
 
-        $customerInfoDiv = "{$customerArray[0]} {$customerArray[1]}<br> {$customerArray[3]}<br> {$customerArray[4]} {$customerArray[5]}<br> {$customerArray[2]}";
+        $customerInfoDiv = "<div><span>$customerArray[0]</span> <span>$customerArray[1]</span></div> 
+        <div>$customerArray[3]</div> 
+        <div><span>$customerArray[4]</span> <span>$customerArray[5]</span></div> 
+        <div>$customerArray[2]</div>";
     } else {
         $customerInfoDiv = "U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.";
     }
@@ -63,9 +66,7 @@
                     <p class="order-overview-result">
 
                     </p>
-                    <p>
                         <h5>Totaal: <span class="receipt-total"></span></h5>
-                    </p>
                 </div>
             </div>
             <div class="card p-2 ps-3">
