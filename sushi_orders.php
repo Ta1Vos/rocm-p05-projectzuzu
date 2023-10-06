@@ -1,19 +1,24 @@
 <?php
-    include("db_connection.php");
-    global $result;
-    var_dump($result);
+$divContent = null;
 
-    $divContent = null;
- function loadSushi($loadingPlace, $objectToLoad) {
-     $divContent = "";
+include("db_connection.php");
+global $result;
 
-     forEach($objectToLoad as $key) {
-         $divContent .= "<div class='row'>" . $key ."</div>";
-     }
-     for ($i=0; $i<count($objectToLoad); $i++) {
-        
-     }
- }
+//Sushi Loader
+$divContent = "<div class='row d-flex align-items-stretch'>";
+
+foreach ($result as $product) {
+    $divContent .= "<div class='card m-3 d-flex flex-column p-3' style='width: 18rem;'>";
+    $divContent .= "<img src='{$product['image']}' class='card-img-top' alt='sushi'>";
+    $divContent .= "<div class='card-body'>";
+    $divContent .= "<h5 class='card-title'>{$product["name"]}</h5>";
+    $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
+    $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
+    $divContent .= "<a href='#' class='btn btn-primary justify-self-end'>Go somewhere</a></div>";
+}
+
+$divContent .= "</div>";
+//Sushi Loader End
 ?>
 
 <!doctype html>
@@ -23,7 +28,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <title>ZuZu | Bestellen</title>
 </head>
@@ -98,6 +104,8 @@
         <div class="col-2"></div>
     </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 </body>
 </html>
