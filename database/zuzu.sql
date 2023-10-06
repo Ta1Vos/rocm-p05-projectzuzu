@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 06 okt 2023 om 12:17
+-- Gegenereerd op: 06 okt 2023 om 14:59
 -- Serverversie: 10.4.24-MariaDB
 -- PHP-versie: 8.1.6
 
@@ -78,13 +78,13 @@ CREATE TABLE `sushi` (
 --
 
 INSERT INTO `sushi` (`id`, `name`, `price`, `image`, `ingredients`) VALUES
-(1, 'Maki cucumber/salmon', '4.99', 'img/makis/maki_cucumber_salmon', 'Zeewier, rijst, komkommer, zalm'),
-(2, 'Maki Omelet', '3.99', 'img/makis/maki_omelet', 'Zeewier, rijst, Japans Omelet'),
-(3, 'Salmon Ebi Roll', '7.99', 'img/rolls/salmon_ebi_roll', 'Geflambeerde zalm, cheddar kaas, komkommer, gefrituurde garnaal, surimi, Japanse mayonaise'),
-(4, 'Salmon Surimi Roll', '6.99', 'img/rolls/salmon_surimi_roll', 'Geflambeerde zalm, surimi, avocado, masago, komkommer, unagisaus, Japanse mayonaise'),
-(5, 'Nigiri Tuna Melt', '5.99', 'img/nigiris/nigiri_tuna_melt', 'Rijst bed, tonijn, oude gesmolten kaas'),
-(6, 'Nigiri Salmon', '4.99', 'img/nigiris/nigiri_salmon', 'Rijst bed, zalm'),
-(7, 'Nigiri Salmon Cheese', '5.99', 'img/nigiris/nigiri_salmon_cheese', 'Rijst bed, zalm, oude gesmolten kaas');
+(1, 'Maki cucumber/salmon', '4.99', 'img/makis/maki_cucumber_salmon.jpg', 'Zeewier, rijst, komkommer, zalm'),
+(2, 'Maki Omelet', '3.99', 'img/makis/maki_omelet.jpg', 'Zeewier, rijst, Japans Omelet'),
+(3, 'Salmon Ebi Roll', '7.99', 'img/rolls/salmon_ebi_roll.jpg', 'Geflambeerde zalm, cheddar kaas, komkommer, gefrituurde garnaal, surimi, Japanse mayonaise'),
+(4, 'Salmon Surimi Roll', '6.99', 'img/rolls/salmon_surimi_roll.jpg', 'Geflambeerde zalm, surimi, avocado, masago, komkommer, unagisaus, Japanse mayonaise'),
+(5, 'Nigiri Tuna Melt', '5.99', 'img/nigiris/nigiri_tuna_melt.jpg', 'Rijst bed, tonijn, oude gesmolten kaas'),
+(6, 'Nigiri Salmon', '4.99', 'img/nigiris/nigiri_salmon.jpg', 'Rijst bed, zalm'),
+(7, 'Nigiri Salmon Cheese', '5.99', 'img/nigiris/nigiri_salmon_cheese.jpg', 'Rijst bed, zalm, oude gesmolten kaas');
 
 --
 -- Indexen voor geëxporteerde tabellen
