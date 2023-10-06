@@ -1,4 +1,8 @@
 <?php
+    include("db_connection.php");
+    global $result;
+    var_dump($result);
+
     $divContent = null;
  function loadSushi($loadingPlace, $objectToLoad) {
      $divContent = "";
