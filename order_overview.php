@@ -1,5 +1,8 @@
 <?php
     session_start();
+
+    $receipt = null;
+    $receiptTotal = null;
     $customerInfoDiv = null;
 
     if ($_SESSION['customer-info']) {
@@ -8,6 +11,20 @@
         $customerInfoDiv = "{$customerArray[0]} {$customerArray[1]}<br> {$customerArray[3]}<br> {$customerArray[4]} {$customerArray[5]}<br> {$customerArray[2]}";
     } else {
         $customerInfoDiv = "U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.";
+    }
+    //Checks if any sushi has already been selected
+    if (isset($_SESSION['receipt'])) {
+        $totalPrice = 0;
+        //Loops through the session and echoes the sushi, prices and amounts
+        foreach ($_SESSION['receipt'] as $receiptLine) {
+            $product = $receiptLine[0];
+            $amount = $receiptLine[1];
+
+            $receipt .= "{$product["name"]} &euro;" . number_format($product["price"], 2, ",", ".") ." | {$amount}x<br><br>";
+            $totalPrice += $amount * $product["price"];
+        }
+        //Shows the total price of the receipt
+        $receiptTotal = "&euro;" . number_format($totalPrice, 2, ",", ".");
     }
 ?>
 
@@ -61,10 +78,10 @@
                 </h2>
                 <div class="card-body p-1">
                     <p class="order-overview-result">
-
+                        <?= $receipt; ?>
                     </p>
                     <p>
-                        <h5>Totaal: <span class="receipt-total"></span></h5>
+                        <h5>Totaal: <?= $receiptTotal; ?></h5>
                     </p>
                 </div>
             </div>
