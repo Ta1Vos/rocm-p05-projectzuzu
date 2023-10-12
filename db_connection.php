@@ -5,6 +5,20 @@ try {
     $query = $db->prepare("SELECT * FROM sushi");
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+//    //Updates available sushi amount to 50!
+//    foreach($result as $sushi) {
+//        $sushi["available_amount"] = 50;
+//
+//        $query = $db->prepare("UPDATE sushi SET available_amount = 50 WHERE id = " . $sushi["id"]);
+//
+//        if ($query->execute()) {
+//            echo "sushi {$sushi["id"]} aangepast!";
+//        } else {
+//            echo "sushi {$sushi["id"]} NIET aangepast!";
+//        }
+//
+//    }
 } catch(PDOException $error) {
     die("Oh oh! Er is iets fout gegaan! Error code: " . $error->getMessage());
 }
