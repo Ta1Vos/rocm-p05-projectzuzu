@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+$screenOverlay = null;
+
+if (!isset($_SESSION['receipt'])) {
+    $_SESSION['receipt'] = array();
+}
+
 $divContent = null;
 
 include("db_connection.php");
@@ -6,15 +14,24 @@ global $result;
 
 //Sushi Loader
 $divContent = "<div class='row d-flex align-items-stretch'>";
-
+//Checks if a sushi button has already been pressed once and saves the sushi & its amount to the receipt
 foreach ($result as $product) {
-    $divContent .= "<div class='card m-3 d-flex flex-column p-3' style='width: 18rem;'>";
-    $divContent .= "<img src='{$product['image']}' class='card-img-top' alt='sushi'>";
+    if (isset($_POST['add-sushi-' . $product["id"]])) {
+        $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
+        //CHECK FOR SUSHI AMOUNT AVAILABILITY
+    }
+}
+
+//Creates a card for every sushi in the database
+foreach ($result as $product) {
+    $divContent .= "<form method='post' class='card m-3 d-flex flex-column p-3' style='width: 18rem;'>";
+    $divContent .= "<img src='{$product["image"]}' class='card-img-top' alt='Afbeelding van de sushi'>";
     $divContent .= "<div class='card-body'>";
     $divContent .= "<h5 class='card-title'>{$product["name"]}</h5>";
     $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
     $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
-    $divContent .= "<a href='#' class='btn btn-primary justify-self-end'>Go somewhere</a></div>";
+    $divContent .= "<p class='m-auto'>Aantal:</p><br><input type='number' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'><br>";
+    $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-primary justify-self-end' value='Bestellen'></form>";
 }
 
 $divContent .= "</div>";
@@ -63,16 +80,18 @@ $divContent .= "</div>";
     </nav>
 </header>
 <main>
-    <div class="row mt-5">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <h2>Sushi's bestellen</h2>
-            <div class="sushi-overview">
-                <?= $divContent; ?>
+    <div class="overlay <?= $screenOverlay; ?>">
+        <div class="row mt-5">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <h2>Sushi's bestellen</h2>
+                <div class="sushi-overview">
+                    <?= $divContent; ?>
+                </div>
+                <button type="button" class="btn btn-dark mt-5">Verzenden</button>
             </div>
-            <button type="button" class="btn btn-dark mt-5">Verzenden</button>
+            <div class="col-2"></div>
         </div>
-        <div class="col-2"></div>
     </div>
 </main>
 <footer>
