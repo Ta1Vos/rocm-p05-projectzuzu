@@ -8,9 +8,9 @@
     if ($_SESSION['customer-info']) {
         $customerArray = unserialize($_SESSION['customer-info']);
 
-        $customerInfoDiv = "{$customerArray[0]} {$customerArray[1]}<br> {$customerArray[3]}<br> {$customerArray[4]} {$customerArray[5]}<br> {$customerArray[2]}";
+        $customerInfoDiv = "{$customerArray[0]} {$customerArray[1]}<br> {$customerArray[3]}<br> {$customerArray[4]} {$customerArray[5]}<br> {$customerArray[2]}"; //Loads customer information
 
-        //Checks if any sushi has already been selected
+        //Checks if any sushi has already been selected on the sushi page
         if (isset($_SESSION['receipt'])) {
             $totalPrice = 0;
             $row = 0;
@@ -19,21 +19,22 @@
             foreach ($_SESSION['receipt'] as $receiptLine) {
                 //Checks if a row has been selected to be deleted
                 if (isset($_POST['remove-row-' . $row])) {
-                    //Removes a row
-                    unset($_SESSION['receipt'][$row]);
-                    //Restores array indexes
-                    $_SESSION['receipt'] = array_values($_SESSION['receipt']);
-                    //Refreshes page
-                    header("Refresh:0");
+                    unset($_SESSION['receipt'][$row]); //Removes a row
+                    $_SESSION['receipt'] = array_values($_SESSION['receipt']); //Restores array indexes
+                    header("Refresh:0"); //Refreshes page so the receipt does not break
                 }
-
+                //Shortcuts to array items
                 $product = $receiptLine[0];
                 $amount = $receiptLine[1];
-
+                $price = $product["price"];
+                //Adds a row to the receipt
                 $receipt .= "&nbsp; <form method='post' class='row'><div class='col-7'><input type='submit' name='remove-row-{$row}' class='btn btn-danger' value='X'>&nbsp;&nbsp;";
-                $receipt .= "{$product["name"]}</div><div class='col-3'></div><div class='col-2 text-end'>{$amount}x | &euro;" . number_format($product["price"], 2, ",", ".") . "</div></form> <br>";
+
+                $price = $amount * $price; //Calculates the total price
+
+                $receipt .= "{$product["name"]}</div><div class='col-3'></div><div class='col-2 text-end'>{$amount}x | &euro;" . number_format($price, 2, ",", ".") . "</div></form> <br>";
                 $totalPrice += $amount * $product["price"];
-                $row++;
+                $row++; //Adds up 1 row as a new one will be created
             }
 
             //Shows the total price of the receipt
