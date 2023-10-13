@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+include("db_connection.php");
+global $db;
+
 //Error fields
 $firstNameError = null;
 $lastNameError = null;
@@ -67,9 +71,23 @@ if (isset($_POST['submit-info'])) {
     }
 
     if (!$fieldError) {
-        $submitDescription = "Het formulier is verzonden!<br>";
-        //Information save code/advanced validation system with real life locations.
-        $_SESSION['customer-info'] = serialize([$firstNameInput, $lastNameInput, $emailInput, $addressInput, $postalCodeInput, $residenceInput]);
+        $query = $db->prepare("INSERT INTO customer(first_name, last_name, email, address, postal_code, residence)
+VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
+
+        $query->bindParam("firstName", $firstNameInput);
+        $query->bindParam("lastName", $lastNameInput);
+        $query->bindParam("email", $emailInput);
+        $query->bindParam("address", $addressInput);
+        $query->bindParam("postalCode", $postalCodeInput);
+        $query->bindParam("residence", $residenceInput);
+
+        if ($query->execute()) {
+            $submitDescription = "Het formulier is verzonden!<br>";
+            //Information save code/advanced validation system with real life locations.
+            $_SESSION['customer-info'] = serialize([$firstNameInput, $lastNameInput, $emailInput, $addressInput, $postalCodeInput, $residenceInput]);
+        } else {
+            $submitDescription = "Er is iets fout gegaan! Uw gegevens zijn NIET toegevoegd aan onze database. Als dit probleem blijft voorkomen neem a.u.b. contact met ons op.";
+        }
     } else {
         $submitDescription = "Niet alles is correct ingevuld, het formulier is niet verzonden<br>";
     }
