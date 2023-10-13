@@ -50,3 +50,7 @@ body {
     font-size: 13px;
     color: red;
 }
+
+.small-num-input {
+    width: 25% !important;
+}

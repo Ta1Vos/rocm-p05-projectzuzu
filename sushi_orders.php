@@ -30,7 +30,7 @@ foreach ($result as $product) {
     $divContent .= "<h5 class='card-title'>{$product["name"]}</h5>";
     $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
     $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
-    $divContent .= "<p class='m-auto'>Aantal:</p><br><input type='number' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'><br>";
+    $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='number' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
     $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-primary justify-self-end' value='Bestellen'></form>";
 }
 
@@ -88,7 +88,7 @@ $divContent .= "</div>";
                 <div class="sushi-overview">
                     <?= $divContent; ?>
                 </div>
-                <button type="button" class="btn btn-dark mt-5">Verzenden</button>
+                <a href="order_overview.php"><button type="button" class="btn btn-dark mt-5">Naar bestel overzicht</button></a>
             </div>
             <div class="col-2"></div>
         </div>
