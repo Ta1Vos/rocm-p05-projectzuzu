@@ -2,6 +2,8 @@
 session_start();
 
 $screenOverlay = null;
+$errorField = array();
+$confirmSushiSave = false;
 
 if (!isset($_SESSION['receipt'])) {
     $_SESSION['receipt'] = array();
@@ -16,9 +18,18 @@ global $result;
 $divContent = "<div class='row d-flex align-items-stretch'>";
 //Checks if a sushi button has already been pressed once and saves the sushi & its amount to the receipt
 foreach ($result as $product) {
+    //Checks for the sushi that has been selected
     if (isset($_POST['add-sushi-' . $product["id"]])) {
-        $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
-        //CHECK FOR SUSHI AMOUNT AVAILABILITY
+        //Checks if requested amount is within the range of the available amount
+        if ($product["available_amount"] >= $_POST["sushi-{$product["id"]}-amount"]) {
+            //Adds sushi to receipt
+            $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
+        } 
+        // else {
+        //     if () {
+        //         $errorField[$product["id"]] = "Helaas kunnen wij niet meer dan {$product["available_amount"]} {$product["name"]} leveren.";
+        //     }
+        // }
     }
 }
 
@@ -31,7 +42,10 @@ foreach ($result as $product) {
     $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
     $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
     $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='number' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
+    $divContent .= "<div class='text-center error-field'>" . $errorField[$product["id"]] = null . "</div><br>";
     $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-primary justify-self-end' value='Bestellen'></form>";
+
+    //Code to display text in error field. Resulted by the first foreach loop.
 }
 
 $divContent .= "</div>";
