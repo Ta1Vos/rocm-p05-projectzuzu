@@ -14,6 +14,20 @@ $divContent = null;
 include("db_connection.php");
 global $result;
 
+// //Updates shushi amount on local side so customer doesn't order too many.
+// foreach ($_SESSION['receipt'] as $productInfo) {
+//     foreach($result as $product) {
+//         global $productInfo;
+//         $receiptProduct = $productInfo[0];
+
+//         if ($receiptProduct["id"] == $product["id"]) {
+//             echo "{$receiptProduct["id"]} and {$product["id"]} : ";
+//             $product["available_amount"] -= intval($productInfo[1]);
+//             echo "{$product["available_amount"]}<br>";
+//         }
+//     }
+// }
+
 //Sushi Loader
 $divContent = "<div class='row d-flex align-items-stretch'>";
 //Checks if a sushi button has already been pressed once and saves the sushi & its amount to the receipt
@@ -24,6 +38,7 @@ foreach ($result as $product) {
         if ($product["available_amount"] >= $_POST["sushi-{$product["id"]}-amount"]) {
             //Adds sushi to receipt
             $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
+            $product["available_amount"] -= $_POST["sushi-{$product["id"]}-amount"];
         } 
         // else {
         //     if () {
