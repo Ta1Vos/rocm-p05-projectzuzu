@@ -14,19 +14,17 @@ $divContent = null;
 include("db_connection.php");
 global $result;
 
-// //Updates shushi amount on local side so customer doesn't order too many.
-// foreach ($_SESSION['receipt'] as $productInfo) {
-//     foreach($result as $product) {
-//         global $productInfo;
-//         $receiptProduct = $productInfo[0];
+//Updates shushi amount on local side so customer doesn't order more than which is present in the database.
+foreach ($_SESSION['receipt'] as $productInfo) {
+    foreach ($result as &$product) {
+        global $productInfo;
+        $receiptProduct = $productInfo[0];
 
-//         if ($receiptProduct["id"] == $product["id"]) {
-//             echo "{$receiptProduct["id"]} and {$product["id"]} : ";
-//             $product["available_amount"] -= intval($productInfo[1]);
-//             echo "{$product["available_amount"]}<br>";
-//         }
-//     }
-// }
+        if ($receiptProduct["id"] == $product["id"]) {
+            $product["available_amount"] = intval($product["available_amount"]) - intval($productInfo[1]);
+        }
+    }
+}
 
 //Sushi Loader
 $divContent = "<div class='row d-flex align-items-stretch'>";
@@ -35,11 +33,12 @@ foreach ($result as $product) {
     //Checks for the sushi that has been selected
     if (isset($_POST['add-sushi-' . $product["id"]])) {
         //Checks if requested amount is within the range of the available amount
+
         if ($product["available_amount"] >= $_POST["sushi-{$product["id"]}-amount"]) {
             //Adds sushi to receipt
             $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
             $product["available_amount"] -= $_POST["sushi-{$product["id"]}-amount"];
-        } 
+        }
         // else {
         //     if () {
         //         $errorField[$product["id"]] = "Helaas kunnen wij niet meer dan {$product["available_amount"]} {$product["name"]} leveren.";
@@ -117,7 +116,9 @@ $divContent .= "</div>";
                 <div class="sushi-overview">
                     <?= $divContent; ?>
                 </div>
-                <a href="order_overview.php"><button type="button" class="btn btn-dark mt-5">Naar bestel overzicht</button></a>
+                <a href="order_overview.php">
+                    <button type="button" class="btn btn-dark mt-5">Naar bestel overzicht</button>
+                </a>
             </div>
             <div class="col-2"></div>
         </div>
