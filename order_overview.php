@@ -42,6 +42,14 @@
 
                 //Shows order button after there is at least something to be purchased
                 if ($totalPrice > 0) {
+                    include("calc_open_time.php");
+                    global $opened;
+                    $confirmButton = "";
+
+                    if (!$opened) {
+                        $confirmButton = "<small>(Helaas zijn wij op dit moment gesloten. Ivm presentatie benodigdheden blijft de besteloptie zichtbaar)</small><br>";
+                    }
+
                     $confirmButton .= "<input type='submit' name='confirm-order' value='Bestellen' class='btn btn-dark'>";
                 }
 
