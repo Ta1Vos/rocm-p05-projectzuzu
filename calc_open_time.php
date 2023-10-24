@@ -40,6 +40,6 @@ if ($currentHour > $openTimes[$currentDay][0] && $currentHour < $openTimes[$curr
 
 $currentOpenTime = "{$openTimes[$currentDay][2]}; $openTime";
 
-if ($openTimes[$currentDay][0] && $openTimes[$currentDay][1]) {
+if ($openTimes[$currentDay][0] <= $currentHour && $openTimes[$currentDay][1] >= $currentHour) {
     $opened = true;
 }
