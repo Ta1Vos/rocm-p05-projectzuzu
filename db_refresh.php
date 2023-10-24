@@ -1,4 +1,5 @@
 <?php
+session_start();
 $db = new PDO("mysql:host=localhost;dbname=zuzu", "root", "");
 
 $query = $db->prepare("SELECT * FROM sushi");
@@ -18,6 +19,7 @@ foreach ($result as $sushi) {
     }
 }
 
+session_destroy();
 header("location:http://localhost/sd22-p5-projectzuzu-Ta1Vos/index.php");
 sleep(5);
 
