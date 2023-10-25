@@ -44,6 +44,7 @@ foreach ($result as $product) {
         //         $errorField[$product["id"]] = "Helaas kunnen wij niet meer dan {$product["available_amount"]} {$product["name"]} leveren.";
         //     }
         // }
+        // CREATE MESSAGE FOR NOT ENOUGH AVAILABILITY
     }
 }
 
