@@ -85,6 +85,7 @@ VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
             $submitDescription = "Het formulier is verzonden!<br>";
             //Information save code/advanced validation system with real life locations.
             $_SESSION['customer-info'] = serialize([$firstNameInput, $lastNameInput, $emailInput, $addressInput, $postalCodeInput, $residenceInput]);
+            header("Location: http://localhost/sd22-p5-projectzuzu-Ta1Vos/order_overview.php");
         } else {
             $submitDescription = "Er is iets fout gegaan! Uw gegevens zijn NIET toegevoegd aan onze database. Als dit probleem blijft voorkomen neem a.u.b. contact met ons op.";
         }

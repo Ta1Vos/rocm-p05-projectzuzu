@@ -55,6 +55,12 @@
 
                 //Shows the total price of the receipt
                 $receiptTotal = "&euro;" . number_format($totalPrice, 2, ",", ".");
+
+                if (count($_SESSION['receipt']) <= 0) {
+                    $receipt = "<div class='text-center'>U heeft nog geen sushi geselecteerd.<br><br><a href='sushi_orders.php' class='btn btn-dark'>Ga naar de sushi's</a></div>";
+                }
+            } else {
+                $receipt = "<div class='text-center'>U heeft nog geen sushi geselecteerd.<br><br><a href='sushi_orders.php' class='btn btn-dark'>Ga naar de sushi's</a></div>";
             }
         } else {
             $customerInfoDiv = "U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.";
