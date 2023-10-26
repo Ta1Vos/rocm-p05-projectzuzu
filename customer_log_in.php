@@ -8,6 +8,7 @@ $emailError = null;
 $firstNameInput = null;
 $lastNameInput = null;
 $emailInput = null;
+$emailInputType = "email";
 
 $submitDescription = null;
 
