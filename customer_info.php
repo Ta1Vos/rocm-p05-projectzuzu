@@ -31,23 +31,7 @@ if (isset($_POST['submit-info'])) {
     $postalCodeInput = $_POST['postal-code-input'];
     $residenceInput = $_POST['residence-input'];
 
-    if (empty($firstNameInput)) {
-        $firstNameError = "*Vul dit veld in";
-        $fieldError = true;
-    }
-
-    if (empty($lastNameInput)) {
-        $lastNameError = "*Vul dit veld in";
-        $fieldError = true;
-    }
-
-    if (empty($emailInput)) {
-        $emailError = "*Vul dit veld in";
-        $fieldError = true;
-    } else if (!filter_var($emailInput, FILTER_VALIDATE_EMAIL))  {
-        $emailError = "*Vul een correcte email in";
-        $fieldError = true;
-    }
+    include("check_basic_input.php");
 
     if (empty($addressInput)) {
         $addressError = "*Vul dit veld in";
@@ -114,7 +98,7 @@ VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
 <main>
     <div class="row mt-5">
         <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-8 pb-5">
             <form method="post" action="">
                 <h2>Klantgegevens</h2>
                 <!-- First name -->
@@ -155,6 +139,7 @@ VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
                 </div>
                 <div class="error-field"><?= $submitDescription; ?></div>
                 <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">
+                &nbsp;<a href="customer_log_in.php" class="text-danger underline">Heb je al een account? Klik hier om in te loggen</a>
             </form>
         </div>
         <div class="col-2"></div>
