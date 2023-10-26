@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+include("db_connection.php");
+global $db;
+
 //Error fields
 $firstNameError = null;
 $lastNameError = null;
@@ -28,28 +32,7 @@ if (isset($_POST['submit-info'])) {
     $postalCodeInput = $_POST['postal-code-input'];
     $residenceInput = $_POST['residence-input'];
 
-    if (empty($firstNameInput)) {
-        $firstNameError = "*Vul dit veld in";
-        $fieldError = true;
-    }
-
-    if (empty($lastNameInput)) {
-        $lastNameError = "*Vul dit veld in";
-        $fieldError = true;
-    }
-
-    //Cheatcode for testing with JOSF, turns email input into text input.
-    if ($firstNameInput == "JOSF" && $lastNameInput == "tEstEr") {
-        $emailInputType = "text";
-    }
-
-    if (empty($emailInput)) {
-        $emailError = "*Vul dit veld in";
-        $fieldError = true;
-    } else if (!filter_var($emailInput, FILTER_VALIDATE_EMAIL))  {
-        $emailError = "*Vul een correcte email in";
-        $fieldError = true;
-    }
+    include("check_basic_input.php");
 
     if (empty($addressInput)) {
         $addressError = "*Vul dit veld in";
@@ -73,9 +56,24 @@ if (isset($_POST['submit-info'])) {
     }
 
     if (!$fieldError) {
-        $submitDescription = "Het formulier is verzonden!<br>";
-        //Information save code/advanced validation system with real life locations.
-        $_SESSION['customer-info'] = serialize([$firstNameInput, $lastNameInput, $emailInput, $addressInput, $postalCodeInput, $residenceInput]);
+        $query = $db->prepare("INSERT INTO customer(first_name, last_name, email, address, postal_code, residence)
+VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
+
+        $query->bindParam("firstName", $firstNameInput);
+        $query->bindParam("lastName", $lastNameInput);
+        $query->bindParam("email", $emailInput);
+        $query->bindParam("address", $addressInput);
+        $query->bindParam("postalCode", $postalCodeInput);
+        $query->bindParam("residence", $residenceInput);
+
+        if ($query->execute()) {
+            $submitDescription = "Het formulier is verzonden!<br>";
+            //Information save code/advanced validation system with real life locations.
+            $_SESSION['customer-info'] = serialize([$firstNameInput, $lastNameInput, $emailInput, $addressInput, $postalCodeInput, $residenceInput]);
+            header("Location: http://localhost/sd22-p5-projectzuzu-Ta1Vos/order_overview.php");
+        } else {
+            $submitDescription = "Er is iets fout gegaan! Uw gegevens zijn NIET toegevoegd aan onze database. Als dit probleem blijft voorkomen neem a.u.b. contact met ons op.";
+        }
     } else {
         $submitDescription = "Niet alles is correct ingevuld, het formulier is niet verzonden<br>";
     }
@@ -95,37 +93,13 @@ if (isset($_POST['submit-info'])) {
 </head>
 <body>
 <header>
-    <div class="container-fluid ps-0">
-        <img class="vw-100 vh-5" src="img/sushi_header.png" alt="Afbeelding van sushi">
-    </div>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
-        <div class="row container-fluid ps-0 ps-3">
-            <div class="col-4"></div>
-            <a class="col-1 navbar-brand ps-3 text-bright-red" href="index.php">ZuZu</a>
-            <div class="col-1 collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="sushi_orders.php">Sushi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="order_overview.php">Besteloverzicht</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="customer_info.php">Klantgegevens</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-5"></div>
-        </div>
-    </nav>
+    <?= $navInfoClass = "active"; ?>
+    <?php include("navbar.php"); ?>
 </header>
 <main>
     <div class="row mt-5">
         <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-8 pb-5">
             <form method="post" action="">
                 <h2>Klantgegevens</h2>
                 <!-- First name -->
@@ -166,39 +140,16 @@ if (isset($_POST['submit-info'])) {
                 </div>
                 <div class="error-field"><?= $submitDescription; ?></div>
                 <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">
+                &nbsp;<a href="customer_log_in.php" class="text-danger underline">Heb je al een account? Klik hier om in te loggen</a>
             </form>
         </div>
         <div class="col-2"></div>
     </div>
 </main>
 <footer>
-    <div class="row vh-20 bg-dark text-white text-center p-3 mt-5">
-        <div class="col-2"></div>
-        <div class="col-2">
-            <h6>Contactgegevens</h6>
-            <small>
-                Restaurant ZuZu<br>
-                Appelstraat 1<br>
-                1111AA Fruit<br>
-                zuzu@gmail.com<br>
-                +06-12345678
-            </small>
-        </div>
-        <div class="col-4"></div>
-        <div class="col-2">
-            <h6>Openingstijden</h6>
-            <small>
-                Maandag: Gesloten<br>
-                Dinsdag: Gesloten<br>
-                Woensdag: 16.00-20.00<br>
-                Donderdag: 16.00-20.00<br>
-                Vrijdag: 15.00-21.00<br>
-                Zaterdag: 12.00-21.00<br>
-                Zondag: 12.00-20.00<br>
-            </small>
-        </div>
-        <div class="col-2"></div>
-    </div>
+    <footer>
+        <?php include("footer.php"); ?>
+    </footer>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
