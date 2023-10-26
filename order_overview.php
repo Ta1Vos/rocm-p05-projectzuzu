@@ -64,7 +64,8 @@
                 $receipt = "<div class='text-center'>U heeft nog geen sushi geselecteerd.<br><br><a href='sushi_orders.php' class='btn btn-dark'>Ga naar de sushi's</a></div>";
             }
         } else {
-            $customerInfoDiv = "U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.";
+            $customerInfoDiv = "<div class='text-center'>U bent helaas niet ingelogd of u heeft nog geen gegevens doorgegeven. Hierdoor kunt u nog niets bestellen.<br><br>
+            <a href='customer_info.php' class='btn btn-dark'>Ga naar de registratiepagina</a></div>";
         }
     } else {
         //If the order has been confirmed
