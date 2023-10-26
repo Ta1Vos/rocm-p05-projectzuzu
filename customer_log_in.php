@@ -44,11 +44,13 @@ if (isset($_POST['submit-info'])) {
                 }
             } else {
                 $submitDescription = "Wij hebben helaas geen gegevens opgeslagen over de gegevens die u heeft ingevoerd.<br>
-Heeft u al eens account gemaakt?";
+                   Heeft u al eens account gemaakt?";
             }
         } catch (PDOException $error) {
             die("Oh oh! Er is iets fout gegaan! Error code: " . $error->getMessage());
         }
+    } else {
+        $submitDescription = "Niet alles is correct ingevuld, het formulier is niet verzonden<br>";
     }
 }
 ?>
