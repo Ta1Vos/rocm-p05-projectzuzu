@@ -1,11 +1,14 @@
 <?php
-    include("calc_open_time.php");
-    global $greeting, $dateToday, $currentOpenTime, $deliveryStatus;
+include("calc_open_time.php");
+global $greeting, $dateToday, $currentOpenTime, $deliveryStatus;
 
-    $deliveryStatus = "Het spijt ons, maar rond deze tijden bezorgen wij nog niet";
+$deliveryStatus = "Het spijt ons, maar rond deze tijden bezorgen wij nog niet";
 
-
-
+//Attempted to define all variables for navbar, having no result in the end. The include file still has an undefined error
+$navHomeClass = "active";
+$navSushiClass = null;
+$navOverviewClass = null;
+$navInfoClass = null;
 ?>
 
 <!doctype html>
@@ -22,7 +25,6 @@
 </head>
 <body>
 <header>
-    <?= $navHomeClass = "active"; ?>
     <?php include("navbar.php"); ?>
 </header>
 <main>
@@ -68,7 +70,7 @@
     </div>
 </main>
 <footer>
-<?php include("footer.php"); ?>
+    <?php include("footer.php"); ?>
 </footer>
 
 
