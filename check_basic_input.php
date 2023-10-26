@@ -9,6 +9,11 @@ if (empty($lastNameInput)) {
     $fieldError = true;
 }
 
+//Cheatcode for testing with JOSF, turns email input into text input.
+if ($firstNameInput == "JOSF" && $lastNameInput == "tEstEr") {
+    $emailInputType = "text";
+}
+
 if (empty($emailInput)) {
     $emailError = "*Vul dit veld in";
     $fieldError = true;
