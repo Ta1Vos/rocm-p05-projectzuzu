@@ -11,7 +11,8 @@
         if (isset($_SESSION['customer-info'])) {
             $customerArray = unserialize($_SESSION['customer-info']);
 
-            $customerInfoDiv = "{$customerArray[0]} {$customerArray[1]}<br> {$customerArray[3]}<br> {$customerArray[4]} {$customerArray[5]}<br> {$customerArray[2]}"; //Loads customer information
+            $customerInfoDiv = "<span>$customerArray[0]</span> <span>$customerArray[1]</span><br> <span>$customerArray[3]</span>
+            <br> <span>$customerArray[4]</span> <span>$customerArray[5]</span><br> <span>$customerArray[2]</span>"; //Loads customer information
 
             //Checks if any sushi has already been selected on the sushi page
             if (isset($_SESSION['receipt'])) {

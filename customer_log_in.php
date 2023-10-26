@@ -8,6 +8,7 @@ $emailError = null;
 $firstNameInput = null;
 $lastNameInput = null;
 $emailInput = null;
+$emailInputType = "email";
 
 $submitDescription = null;
 
@@ -44,11 +45,13 @@ if (isset($_POST['submit-info'])) {
                 }
             } else {
                 $submitDescription = "Wij hebben helaas geen gegevens opgeslagen over de gegevens die u heeft ingevoerd.<br>
-Heeft u al eens account gemaakt?";
+                   Heeft u al eens account gemaakt?";
             }
         } catch (PDOException $error) {
             die("Oh oh! Er is iets fout gegaan! Error code: " . $error->getMessage());
         }
+    } else {
+        $submitDescription = "Niet alles is correct ingevuld, het formulier is niet verzonden<br>";
     }
 }
 ?>
@@ -92,7 +95,7 @@ Heeft u al eens account gemaakt?";
                 <div class="mb-3">
                     <div class="error-field"><?= $emailError; ?></div>
                     <label for="exampleInputPassword1" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email-input" value="<?= $emailInput; ?>">
+                    <input type="<?= $emailInputType; ?>" class="form-control" name="email-input" value="<?= $emailInput; ?>">
                 </div>
                 <div class="error-field"><?= $submitDescription; ?></div>
                 <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">&nbsp;

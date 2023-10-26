@@ -12,6 +12,7 @@ if (empty($lastNameInput)) {
 //Cheatcode for testing with JOSF, turns email input into text input.
 if ($firstNameInput == "JOSF" && $lastNameInput == "tEstEr") {
     $emailInputType = "text";
+    echo "<br><br><br><br><br><br><br><br><br><br><br>";
 }
 
 if (empty($emailInput)) {
