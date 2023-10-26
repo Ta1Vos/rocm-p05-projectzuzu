@@ -30,20 +30,30 @@ foreach ($_SESSION['receipt'] as $productInfo) {
 $divContent = "<div class='row d-flex align-items-stretch'>";
 //Checks if a sushi button has already been pressed once and saves the sushi & its amount to the receipt
 foreach ($result as $product) {
+    $errorField[$product["id"]] = null; //Creates the array index
+
     //Checks for the sushi that has been selected
     if (isset($_POST['add-sushi-' . $product["id"]])) {
-        //Checks if requested amount is within the range of the available amount
-
-        if ($product["available_amount"] >= $_POST["sushi-{$product["id"]}-amount"]) {
-            //Adds sushi to receipt
-            $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
-            $product["available_amount"] -= $_POST["sushi-{$product["id"]}-amount"];
+        //Checks if given amount is a valid number
+        if (filter_input(INPUT_POST, "sushi-{$product["id"]}-amount", FILTER_VALIDATE_INT)) {
+            //Checks if the customer doesn't give a negative number.
+            if ($_POST["sushi-{$product["id"]}-amount"] > 0) {
+                //Checks if requested amount is within the range of the available amount
+                if ($product["available_amount"] >= $_POST["sushi-{$product["id"]}-amount"]) {
+                    $errorField[$product["id"]] = "<div class=text-success>" . $_POST["sushi-{$product["id"]}-amount"] . "x " . $product["name"] . " aan uw bon toegevoegd</div>";//Adds confirmation message
+                    //Adds sushi to receipt
+                    $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
+                    $product["available_amount"] -= $_POST["sushi-{$product["id"]}-amount"];
+                } else {
+                    $errorField[$product["id"]] = "Helaas kunnen wij niet meer dan {$product["available_amount"]} {$product["name"]} leveren.";//Error message in case the user wants more sushi than there is available
+                }
+            } else {
+                $errorField[$product["id"]] = "Vul een getal boven de 0 in!";
+            }
+        } else {
+            $errorField[$product["id"]] = "Vul een getal in!";
         }
-        // else {
-        //     if () {
-        //         $errorField[$product["id"]] = "Helaas kunnen wij niet meer dan {$product["available_amount"]} {$product["name"]} leveren.";
-        //     }
-        // }
+
         // CREATE MESSAGE FOR NOT ENOUGH AVAILABILITY
     }
 }
@@ -57,10 +67,8 @@ foreach ($result as $product) {
     $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
     $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
     $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='number' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
-    $divContent .= "<div class='text-center error-field'>" . $errorField[$product["id"]] = null . "</div><br>";
+    $divContent .= "<div class='text-center error-field'>" . $errorField[$product["id"]] . "</div><br>";
     $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-primary justify-self-end' value='Bestellen'></form>";
-
-    //Code to display text in error field. Resulted by the first foreach loop.
 }
 
 $divContent .= "</div>";
