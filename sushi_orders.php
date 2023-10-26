@@ -36,14 +36,19 @@ foreach ($result as $product) {
     if (isset($_POST['add-sushi-' . $product["id"]])) {
         //Checks if given amount is a valid number
         if (filter_input(INPUT_POST, "sushi-{$product["id"]}-amount", FILTER_VALIDATE_INT)) {
-            //Checks if requested amount is within the range of the available amount
-            if ($product["available_amount"] >= $_POST["sushi-{$product["id"]}-amount"]) {
-                $errorField[$product["id"]] = "<div class=text-success>" . $_POST["sushi-{$product["id"]}-amount"] . "x " . $product["name"] . " aan uw bon toegevoegd</div>";//Adds confirmation message
-                //Adds sushi to receipt
-                $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
-                $product["available_amount"] -= $_POST["sushi-{$product["id"]}-amount"];
+            //Checks if the customer doesn't give a negative number.
+            if ($_POST["sushi-{$product["id"]}-amount"] > 0) {
+                //Checks if requested amount is within the range of the available amount
+                if ($product["available_amount"] >= $_POST["sushi-{$product["id"]}-amount"]) {
+                    $errorField[$product["id"]] = "<div class=text-success>" . $_POST["sushi-{$product["id"]}-amount"] . "x " . $product["name"] . " aan uw bon toegevoegd</div>";//Adds confirmation message
+                    //Adds sushi to receipt
+                    $_SESSION['receipt'][] = [$product, $_POST["sushi-{$product["id"]}-amount"]];
+                    $product["available_amount"] -= $_POST["sushi-{$product["id"]}-amount"];
+                } else {
+                    $errorField[$product["id"]] = "Helaas kunnen wij niet meer dan {$product["available_amount"]} {$product["name"]} leveren.";//Error message in case the user wants more sushi than there is available
+                }
             } else {
-                $errorField[$product["id"]] = "Helaas kunnen wij niet meer dan {$product["available_amount"]} {$product["name"]} leveren.";//Error message in case the user wants more sushi than there is available
+                $errorField[$product["id"]] = "Vul een getal boven de 0 in!";
             }
         } else {
             $errorField[$product["id"]] = "Vul een getal in!";
