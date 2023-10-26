@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $firstNameError = null;
 $lastNameError = null;
 $emailError = null;
@@ -13,40 +15,42 @@ include("db_connection.php");
 global $db;
 
 //WORKING ON LOG IN
-//if (isset($_POST['submit-info'])) {
-//    $fieldError = false;
-//
-//    $firstNameInput = $_POST['first-name-input'];
-//    $lastNameInput = $_POST['last-name-input'];
-//    $emailInput = $_POST['email-input'];
-//
-//    include("check_basic_input.php");
-//
-//    if (!$fieldError) {
-//        try {
-//            $query = $db->prepare("SELECT * FROM customer WHERE email = " . $emailInput);
-//
-//            if ($query->execute()) {
-//                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-//
-//                foreach ($result as $customer) {
-//                    if ($customer["first_name"] == $firstNameInput && $customer["last_name"] == $lastNameInput && $customer["email"] == $emailInput) {
-//                        $submitDescription = "Het formulier is verzonden!<br>";
-//                        //Information save code/advanced validation system with real life locations.
-//                        $_SESSION['customer-info'] = serialize([$customer["first_name"], $customer["last_name"], $customer["email"],
-//                            $customer["address"], $customer["postal_code"], $customer["residence"]]);
-//                        header("Location: http://localhost/sd22-p5-projectzuzu-Ta1Vos/order_overview.php");
-//                    }
-//                }
-//            } else {
-//                $submitDescription = "Wij hebben helaas geen gegevens opgeslagen over de gegevens die u heeft ingevoerd.<br>
-//Heeft u al eens account gemaakt?";
-//            }
-//        } catch (PDOException $error) {
-//            die("Oh oh! Er is iets fout gegaan! Error code: " . $error->getMessage());
-//        }
-//    }
-//}
+if (isset($_POST['submit-info'])) {
+    $fieldError = false;
+
+    $firstNameInput = $_POST['first-name-input'];
+    $lastNameInput = $_POST['last-name-input'];
+    $emailInput = $_POST['email-input'];
+
+    include("check_basic_input.php");
+
+    if (!$fieldError) {
+        try {
+            $query = $db->prepare("SELECT * FROM customer WHERE email = :email");
+
+            $query->bindParam("email", $emailInput);
+
+            if ($query->execute()) {
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($result as $customer) {
+                    if ($customer["first_name"] == $firstNameInput && $customer["last_name"] == $lastNameInput && $customer["email"] == $emailInput) {
+                        $submitDescription = "Het formulier is verzonden!<br>";
+                        //Information save code/advanced validation system with real life locations.
+                        $_SESSION['customer-info'] = serialize([$customer["first_name"], $customer["last_name"], $customer["email"],
+                            $customer["address"], $customer["postal_code"], $customer["residence"]]);
+                        header("Location: http://localhost/sd22-p5-projectzuzu-Ta1Vos/order_overview.php");
+                    }
+                }
+            } else {
+                $submitDescription = "Wij hebben helaas geen gegevens opgeslagen over de gegevens die u heeft ingevoerd.<br>
+Heeft u al eens account gemaakt?";
+            }
+        } catch (PDOException $error) {
+            die("Oh oh! Er is iets fout gegaan! Error code: " . $error->getMessage());
+        }
+    }
+}
 ?>
 
 <!doctype html>

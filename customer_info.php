@@ -139,7 +139,7 @@ VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
                 </div>
                 <div class="error-field"><?= $submitDescription; ?></div>
                 <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">
-<!--                &nbsp;<a href="customer_log_in.php" class="text-danger underline">Heb je al een account? Klik hier om in te loggen</a>-->
+                &nbsp;<a href="customer_log_in.php" class="text-danger underline">Heb je al een account? Klik hier om in te loggen</a>
             </form>
         </div>
         <div class="col-2"></div>
