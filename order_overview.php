@@ -36,7 +36,7 @@
 
                     $price = $amount * $price; //Calculates the total price
 
-                    $receipt .= "{$product["name"]}</div><div class='col-3'></div><div class='col-2 text-end'>{$amount}x | &euro;" . number_format($price, 2, ",", ".") . "</div></form> <br>";
+                    $receipt .= "<span>{$product["name"]}</span></div><div class='col-3'></div><div class='col-2 text-end'>{$amount}x | &euro;" . number_format($price, 2, ",", ".") . "</div></form> <br>";
                     $totalPrice += $amount * $product["price"];
                     $row++; //Adds up 1 row as a new one will be created
                 }
