@@ -4,6 +4,17 @@ session_start();
 $screenOverlay = null;
 $errorField = array();
 $confirmSushiSave = false;
+$amountInputType = "number";
+
+//Cheatcode for testing with JOSF, turns amount input of sushis into text input.
+if (isset($_SESSION['customer-info'])) {
+    $overrideCodes = unserialize($_SESSION['customer-info']);
+
+    //Overrides inputs if the code has been entered.
+    if ($overrideCodes[0] == "JOSF" && $overrideCodes[1] == "tEstEr") {
+        $amountInputType = "text";
+    }
+}
 
 if (!isset($_SESSION['receipt'])) {
     $_SESSION['receipt'] = array();
@@ -66,7 +77,7 @@ foreach ($result as $product) {
     $divContent .= "<h5 class='card-title'>{$product["name"]}</h5>";
     $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
     $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
-    $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='number' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
+    $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='$amountInputType' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
     $divContent .= "<div class='text-center error-field'>" . $errorField[$product["id"]] . "</div><br>";
     $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-primary justify-self-end' value='Bestellen'></form>";
 }
