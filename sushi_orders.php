@@ -11,7 +11,7 @@ if (isset($_SESSION['customer-info'])) {
     $overrideCodes = unserialize($_SESSION['customer-info']);
 
     //Overrides inputs if the code has been entered.
-    if ($overrideCodes[0] == "JOSF" && $overrideCodes[1] == "tEstEr") {
+    if ($overrideCodes[0] == "josf" && $overrideCodes[1] == "tester") {
         $amountInputType = "text";
     }
 }
