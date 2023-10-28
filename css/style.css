@@ -5,6 +5,9 @@
 
 body {
     overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container-fluid {
@@ -66,4 +69,12 @@ body {
 
 .small-num-input {
     width: 25% !important;
+}
+
+header, main {
+    flex: 1;
+}
+
+footer {
+    min-height: max-content;
 }
