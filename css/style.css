@@ -26,11 +26,20 @@ body {
 
 .bg-dark {
     background-color: #0E1C36 !important;
+    color: #e3e3e3 !important;
+}
+
+.border-bg-red {
+    border-color: #AD2831 !important;
 }
 
 .bg-red {
     background-color: #AD2831;
     color: #F7F7FF;
+}
+
+.text-red {
+    color: #ff1323;
 }
 
 .bg-white, bg-light {
