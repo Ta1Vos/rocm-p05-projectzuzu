@@ -34,8 +34,12 @@ body {
 }
 
 .bg-red {
-    background-color: #AD2831;
-    color: #F7F7FF;
+    background-color: #AD2831 !important;
+    color: #F7F7FF !important;
+}
+
+.text-dred {
+    color: #AD2831 !important;
 }
 
 .text-red {
