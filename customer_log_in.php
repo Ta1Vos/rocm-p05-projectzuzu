@@ -19,8 +19,8 @@ global $db;
 if (isset($_POST['submit-info'])) {
     $fieldError = false;
 
-    $firstNameInput = $_POST['first-name-input'];
-    $lastNameInput = $_POST['last-name-input'];
+    $firstNameInput = strtolower($_POST['first-name-input']);
+    $lastNameInput = strtolower($_POST['last-name-input']);
     $emailInput = $_POST['email-input'];
 
     include("check_basic_input.php");
@@ -36,7 +36,7 @@ if (isset($_POST['submit-info'])) {
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($result as $customer) {
-                    if ($customer["first_name"] == $firstNameInput && $customer["last_name"] == $lastNameInput && $customer["email"] == $emailInput) {
+                    if (strtolower($customer["first_name"]) == $firstNameInput && strtolower($customer["last_name"]) == $lastNameInput && $customer["email"] == $emailInput) {
                         $foundCustomer = true;
                         $_SESSION['customer-info'] = serialize([$customer["first_name"], $customer["last_name"], $customer["email"],
                             $customer["address"], $customer["postal_code"], $customer["residence"]]);

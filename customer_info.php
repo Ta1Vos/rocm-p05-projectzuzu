@@ -25,8 +25,8 @@ $residenceInput = null;
 if (isset($_POST['submit-info'])) {
     $fieldError = false;
 
-    $firstNameInput = $_POST['first-name-input'];
-    $lastNameInput = $_POST['last-name-input'];
+    $firstNameInput = strtolower($_POST['first-name-input']);
+    $lastNameInput = strtolower($_POST['last-name-input']);
     $emailInput = $_POST['email-input'];
     $addressInput = $_POST['address-input'];
     $postalCodeInput = $_POST['postal-code-input'];
