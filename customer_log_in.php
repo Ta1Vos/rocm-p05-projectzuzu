@@ -85,7 +85,7 @@ if (isset($_POST['submit-info'])) {
         <div class="col-2"></div>
         <div class="col-8">
             <form method="post" action="">
-                <h2>Klantgegevens</h2>
+                <h2><span class="border-end pe-3">Klantgegevens</span><span class="ps-3">Inloggen</span></h2>
                 <!-- First name -->
                 <div class="mb-3">
                     <div class="error-field"><?= $firstNameError; ?></div>
@@ -105,7 +105,7 @@ if (isset($_POST['submit-info'])) {
                     <input type="<?= $emailInputType; ?>" class="form-control" name="email-input" value="<?= $emailInput; ?>">
                 </div>
                 <div class="error-field"><?= $submitDescription; ?></div>
-                <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">&nbsp;
+                <input type="submit" class="btn btn-danger bg-red" name="submit-info" value="Inloggen">&nbsp;
                 <a href="customer_info.php" class="text-danger underline">Heb je nog geen account? Klik hier om er één
                     te maken</a>
             </form>
