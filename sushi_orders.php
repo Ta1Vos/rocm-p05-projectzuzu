@@ -25,14 +25,20 @@ $divContent = null;
 include("db_connection.php");
 global $result;
 
-//Updates shushi amount on local side so customer doesn't order more than which is present in the database.
+//Updates sushi amount on local side so customer doesn't order more than which is present in the database.
+/* NOTE: I used chatGPT to debug in this part due to the fact I couldn't troubleshoot a bug. The issue was, is that I
+used `&$product`, instead of a key:value pair. This mistake made the array modification unpredictable and started to duplicate
+and replace the next item in the array. By using a key:value reference (key is $i), and altering $result indirectly using
+the key, I made the modification predictable and only working on this specific index, so it wouldn't be able to affect
+other indexes. */
 foreach ($_SESSION['receipt'] as $productInfo) {
-    foreach ($result as &$product) {
-        global $productInfo;
+    foreach ($result as $i => $product) { // Removed the & operator, replaced it with key:value
         $receiptProduct = $productInfo[0];
 
         if ($receiptProduct["id"] == $product["id"]) {
             $product["available_amount"] = intval($product["available_amount"]) - intval($productInfo[1]);
+            $result[$i] = $product; // Update the original array, instead of directly changing it using `$product`
+            break;
         }
     }
 }
