@@ -4,6 +4,17 @@ session_start();
 $screenOverlay = null;
 $errorField = array();
 $confirmSushiSave = false;
+$amountInputType = "number";
+
+//Cheatcode for testing with JOSF, turns amount input of sushis into text input.
+if (isset($_SESSION['customer-info'])) {
+    $overrideCodes = unserialize($_SESSION['customer-info']);
+
+    //Overrides inputs if the code has been entered.
+    if ($overrideCodes[0] == "JOSF" && $overrideCodes[1] == "tEstEr") {
+        $amountInputType = "text";
+    }
+}
 
 if (!isset($_SESSION['receipt'])) {
     $_SESSION['receipt'] = array();
@@ -14,14 +25,20 @@ $divContent = null;
 include("db_connection.php");
 global $result;
 
-//Updates shushi amount on local side so customer doesn't order more than which is present in the database.
+//Updates sushi amount on local side so customer doesn't order more than which is present in the database.
+/* NOTE: I used chatGPT to debug in this part due to the fact I couldn't troubleshoot a bug. The issue was, is that I
+used `&$product`, instead of a key:value pair. This mistake made the array modification unpredictable and started to duplicate
+and replace the next item in the array. By using a key:value reference (key is $i), and altering $result indirectly using
+the key, I made the modification predictable and only working on this specific index, so it wouldn't be able to affect
+other indexes. */
 foreach ($_SESSION['receipt'] as $productInfo) {
-    foreach ($result as &$product) {
-        global $productInfo;
+    foreach ($result as $i => $product) { // Removed the & operator, replaced it with key:value
         $receiptProduct = $productInfo[0];
 
         if ($receiptProduct["id"] == $product["id"]) {
             $product["available_amount"] = intval($product["available_amount"]) - intval($productInfo[1]);
+            $result[$i] = $product; // Update the original array, instead of directly changing it using `$product`
+            break;
         }
     }
 }
@@ -66,7 +83,7 @@ foreach ($result as $product) {
     $divContent .= "<h5 class='card-title'>{$product["name"]}</h5>";
     $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
     $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
-    $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='number' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
+    $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='$amountInputType' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
     $divContent .= "<div class='text-center error-field'>" . $errorField[$product["id"]] . "</div><br>";
     $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-primary justify-self-end' value='Bestellen'></form>";
 }

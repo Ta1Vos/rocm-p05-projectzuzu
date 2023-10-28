@@ -32,16 +32,23 @@ if (isset($_POST['submit-info'])) {
             $query->bindParam("email", $emailInput);
 
             if ($query->execute()) {
+                $foundCustomer = false;
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($result as $customer) {
                     if ($customer["first_name"] == $firstNameInput && $customer["last_name"] == $lastNameInput && $customer["email"] == $emailInput) {
-                        $submitDescription = "Het formulier is verzonden!<br>";
-                        //Information save code/advanced validation system with real life locations.
+                        $foundCustomer = true;
                         $_SESSION['customer-info'] = serialize([$customer["first_name"], $customer["last_name"], $customer["email"],
                             $customer["address"], $customer["postal_code"], $customer["residence"]]);
+
+                        $submitDescription = "Het formulier is verzonden!<br>";
+
                         header("Location: http://localhost/sd22-p5-projectzuzu-Ta1Vos/order_overview.php");
                     }
+                }
+
+                if (!$foundCustomer) {
+                    $submitDescription = "Helaas hebben wij uw gegevens niet kunnen vinden! Heeft u al een account aangemaakt?";
                 }
             } else {
                 $submitDescription = "Wij hebben helaas geen gegevens opgeslagen over de gegevens die u heeft ingevoerd.<br>
