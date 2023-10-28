@@ -112,7 +112,7 @@ $divContent .= "</div>";
 <main>
     <div class="overlay <?= $screenOverlay; ?>">
         <div class="row mt-5">
-            <div class="col-2"></div>
+            <div class="col-lg-2"></div>
             <div class="col-8">
                 <h2>Sushi's bestellen</h2>
                 <div class="sushi-overview">
@@ -122,7 +122,7 @@ $divContent .= "</div>";
                     <button type="button" class="btn btn-dark mt-5">Naar bestel overzicht</button>
                 </a>
             </div>
-            <div class="col-2"></div>
+            <div class="col-lg-2"></div>
         </div>
     </div>
 </main>

@@ -36,7 +36,7 @@
 
                     $price = $amount * $price; //Calculates the total price
 
-                    $receipt .= "<span>{$product["name"]}</span></div><div class='col-3'></div><div class='col-2 text-end border-start'>{$amount}x | &euro;" . number_format($price, 2, ",", ".") . "</div></form> <br>";
+                    $receipt .= "<span>{$product["name"]}</span></div><div class='col-1 col-lg-3'></div><div class='col-4 col-lg-2 text-end border-start'>{$amount}x | &euro;" . number_format($price, 2, ",", ".") . "</div></form> <br>";
                     $totalPrice += $amount * $product["price"];
                     $row++; //Adds up 1 row as a new one will be created
                 }
@@ -51,7 +51,7 @@
                         $confirmButton = "<small>(Helaas zijn wij op dit moment gesloten. Ivm presentatie benodigdheden blijft de besteloptie zichtbaar)</small><br>";
                     }
 
-                    $confirmButton .= "<input type='submit' name='confirm-order' value='Bestellen' class='btn btn-dark'>";
+                    $confirmButton .= "<input type='submit' name='confirm-order' value='Bestellen' class='btn btn-dark mt-3'>";
                 }
 
                 //Shows the total price of the receipt
@@ -111,7 +111,7 @@
     <?php include("navbar.php"); ?>
 </header>
 <main>
-    <div class="row mt-5">
+    <div class="row">
         <div class="col-2"></div>
         <div class="col-8">
             <div class="card shadow border-bg-red">
@@ -123,10 +123,10 @@
                         <?= $receipt; ?>
                     </p>
                     <form method="post" class="row d-flex">
-                        <span class="col-4"></span>
-                        <span class="col-4 text-center"><?= $confirmButton; ?></span>
-                        <div class="col-2"></div>
-                        <h5 class="col-2 text-end border-start align-self-center">Totaal: <?= $receiptTotal; ?></h5>
+                        <span class="col-lg-4"></span>
+                        <span class="col-12 col-lg-4 text-center"><?= $confirmButton; ?></span>
+                        <div class="col-lg-2"></div>
+                        <h5 class="col-12 col-lg-2 text-center text-lg-end pt-3 pt-lg-0 align-self-center">Totaal: <?= $receiptTotal; ?></h5>
                     </form>
                 </div>
             </div>
