@@ -5,6 +5,9 @@
 
 body {
     overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container-fluid {
@@ -26,11 +29,24 @@ body {
 
 .bg-dark {
     background-color: #0E1C36 !important;
+    color: #e3e3e3 !important;
+}
+
+.border-bg-red {
+    border-color: #AD2831 !important;
 }
 
 .bg-red {
-    background-color: #AD2831;
-    color: #F7F7FF;
+    background-color: #AD2831 !important;
+    color: #F7F7FF !important;
+}
+
+.text-dred {
+    color: #AD2831 !important;
+}
+
+.text-red {
+    color: #ff1323;
 }
 
 .bg-white, bg-light {
@@ -53,4 +69,12 @@ body {
 
 .small-num-input {
     width: 25% !important;
+}
+
+header, main {
+    flex: 1;
+}
+
+footer {
+    min-height: max-content;
 }

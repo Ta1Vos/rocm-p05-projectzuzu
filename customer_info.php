@@ -101,7 +101,7 @@ VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
         <div class="col-2"></div>
         <div class="col-8 pb-5">
             <form method="post" action="">
-                <h2>Klantgegevens</h2>
+                <h2><span class="border-end pe-3">Klantgegevens</span><span class="ps-3">Registreren</span></h2>
                 <!-- First name -->
                 <div class="mb-3">
                     <div class="error-field"><?= $firstNameError; ?></div>
@@ -139,7 +139,7 @@ VALUES (:firstName, :lastName, :email, :address, :postalCode, :residence)");
                     <input type="text" class="form-control" name="residence-input" value="<?= $residenceInput; ?>">
                 </div>
                 <div class="error-field"><?= $submitDescription; ?></div>
-                <input type="submit" class="btn btn-dark" name="submit-info" value="Ga naar sushi's">
+                <input type="submit" class="btn btn-danger bg-red" name="submit-info" value="Registreren">
                 &nbsp;<a href="customer_log_in.php" class="text-danger underline">Heb je al een account? Klik hier om in te loggen</a>
             </form>
         </div>

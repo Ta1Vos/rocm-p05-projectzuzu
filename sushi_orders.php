@@ -77,15 +77,15 @@ foreach ($result as $product) {
 
 //Creates a card for every sushi in the database
 foreach ($result as $product) {
-    $divContent .= "<form method='post' class='card m-3 d-flex flex-column p-3' style='width: 18rem;'>";
+    $divContent .= "<form method='post' class='card shadow-lg border border-bg-red rounded-4 m-3 d-flex flex-column p-3' style='width: 18rem;'>";
     $divContent .= "<img src='{$product["image"]}' class='card-img-top' alt='Afbeelding van de sushi'>";
     $divContent .= "<div class='card-body'>";
-    $divContent .= "<h5 class='card-title'>{$product["name"]}</h5>";
+    $divContent .= "<h5 class='card-title text-red'>{$product["name"]}</h5>";
     $divContent .= "<p class='card-text'>Ingrediënten:<br><br>{$product["ingredients"]}</p>";
-    $divContent .= "<h5 class='card-title'>{$product["price"]}</h5></div>";
+    $divContent .= "<h5 class='card-title'>&euro;{$product["price"]}</h5></div>";
     $divContent .= "<div class='text-center'><p>Aantal:</p><br><input type='$amountInputType' name='sushi-{$product["id"]}-amount' class='small-num-input' value='1'></div><br>";
     $divContent .= "<div class='text-center error-field'>" . $errorField[$product["id"]] . "</div><br>";
-    $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-primary justify-self-end' value='Bestellen'></form>";
+    $divContent .= "<input type='submit' name='add-sushi-{$product["id"]}' class='btn btn-danger justify-self-end bg-red' value='Bestellen'></form>";
 }
 
 $divContent .= "</div>";
@@ -112,7 +112,7 @@ $divContent .= "</div>";
 <main>
     <div class="overlay <?= $screenOverlay; ?>">
         <div class="row mt-5">
-            <div class="col-2"></div>
+            <div class="col-lg-2"></div>
             <div class="col-8">
                 <h2>Sushi's bestellen</h2>
                 <div class="sushi-overview">
@@ -122,7 +122,7 @@ $divContent .= "</div>";
                     <button type="button" class="btn btn-dark mt-5">Naar bestel overzicht</button>
                 </a>
             </div>
-            <div class="col-2"></div>
+            <div class="col-lg-2"></div>
         </div>
     </div>
 </main>

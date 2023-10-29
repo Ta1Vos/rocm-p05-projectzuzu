@@ -56,6 +56,7 @@ $navInfoClass = null;
                 <div class="card-body">
                     <h5 class="card-title">Bestel bij ons uw sushi's</h5>
                 </div>
+                <a href="order_overview.php" class="stretched-link"></a>
             </div>
         </div>
         <div class="col-4">
@@ -64,6 +65,7 @@ $navInfoClass = null;
                 <div class="card-body">
                     <h5 class="card-title">Keuze uit verschillende soorten sushi's</h5>
                 </div>
+                <a href="sushi_orders.php" class="stretched-link"></a>
             </div>
         </div>
         <div class="col-2"></div>
