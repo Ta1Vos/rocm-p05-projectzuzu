@@ -1,9 +1,6 @@
-# sd22-p5-projectZuZu
+# Project ZuZu
 
-Beste student, 
+Project ZuZu is  a school exercise created by ROC Mondriaan, worked out by me. Find more information about this on [timavos.nl](https://timavos.nl).
 
-Hierbij de repository voor jouw ZUZU project. 
-Dit project maak jij indiviueel. 
-Samen met jouw Scrumgroep zal jij de voortgang bijhouden. 
-
-SUCCES!!
+This project is powered with PHP. The suggested version is 8.3>. 
+It is suggested to run this in combination with XAMPP, the database can be found in the database folder.
